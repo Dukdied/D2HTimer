@@ -4381,7 +4381,7 @@ function snuffThemOut(lines) {
         var line = lines_1[_i];
         if (line.text.includes("Come, follow my light...") && latestFollow < line.fragments[1].text) {
             latestFollow = line.fragments[1].text;
-            fragTimer.reset(180);
+            fragTimer.reset(234);
             fragTimer.start(10);
         }
         if (line.text.includes("I WILL NOT BE SUBJUGATED BY A MORTAL!")) {
