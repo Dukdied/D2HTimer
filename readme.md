@@ -3,6 +3,7 @@ This is an Alt1 plugin for Releasing D2H on Amascut P6 to kill all clones on Tic
 
 Timestamps must be enabled in chat, and "I WILL NOT BE SUBJUGATED BY A MORTAL!" must be visible in your chatbox.
 
-Release on 0.
+Est. is the estimated amount of time on a tick perfect run.
+Release on 0 on D2H timer.
 
 Add to Alt1 here: `alt1://addapp/https://dukdied.github.io/D2HTimer/dist/appconfig.json`

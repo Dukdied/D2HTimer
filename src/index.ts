@@ -34,10 +34,19 @@ var beamTimer = new _timer(function (time) {
 		beamTimer.stop();
 	}
 });
+var fragTimer = new _timer(function (time) {
+	let secs_left: number = parseFloat((Math.floor(time / 600) * 0.6).toFixed(1));
+	$("#frag_timer").html(secs_left + "s");
+	if (time <= 0) {
+		fragTimer.stop();
+	}
+});
+
 
 const appColor = A1lib.mixColor(0, 255, 0);
 let reader = new ChatBoxReader.default();
 let latestSubjugated = "00:00:00";
+let latestFollow = "00:00:00";
 
 
 reader.readargs = {
@@ -89,6 +98,12 @@ let findChat = setInterval(function () {
 
 function snuffThemOut(lines) {
 	for (const line of lines) {
+		if (line.text.includes("Come, follow my light...") && latestFollow < line.fragments[1].text)
+		{
+			latestFollow = line.fragments[1].text;
+			fragTimer.reset(180);
+			fragTimer.start(10);
+		}
 		if (line.text.includes("I WILL NOT BE SUBJUGATED BY A MORTAL!")) {
 			// index 1 is the timestamp, index 2 is the chat message
 			if (latestSubjugated !== line.fragments[1].text && latestSubjugated < line.fragments[1].text) {

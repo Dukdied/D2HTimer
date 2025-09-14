@@ -4329,9 +4329,17 @@ var beamTimer = new _timer_js__WEBPACK_IMPORTED_MODULE_6__._timer(function (time
         beamTimer.stop();
     }
 });
+var fragTimer = new _timer_js__WEBPACK_IMPORTED_MODULE_6__._timer(function (time) {
+    var secs_left = parseFloat((Math.floor(time / 600) * 0.6).toFixed(1));
+    _jquery_js__WEBPACK_IMPORTED_MODULE_5__("#frag_timer").html(secs_left + "s");
+    if (time <= 0) {
+        fragTimer.stop();
+    }
+});
 var appColor = alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor(0, 255, 0);
 var reader = new (alt1_chatbox__WEBPACK_IMPORTED_MODULE_1___default())();
 var latestSubjugated = "00:00:00";
+var latestFollow = "00:00:00";
 reader.readargs = {
     colors: [
         (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(255, 255, 255), // White (Timestamp)
@@ -4371,11 +4379,16 @@ var findChat = setInterval(function () {
 function snuffThemOut(lines) {
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
+        if (line.text.includes("Come, follow my light...") && latestFollow < line.fragments[1].text) {
+            latestFollow = line.fragments[1].text;
+            fragTimer.reset(180);
+            fragTimer.start(10);
+        }
         if (line.text.includes("I WILL NOT BE SUBJUGATED BY A MORTAL!")) {
             // index 1 is the timestamp, index 2 is the chat message
             if (latestSubjugated !== line.fragments[1].text && latestSubjugated < line.fragments[1].text) {
                 latestSubjugated = line.fragments[1].text;
-                beamTimer.reset(90);
+                beamTimer.reset(54);
                 beamTimer.start(10);
             }
         }
