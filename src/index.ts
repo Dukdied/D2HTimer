@@ -99,7 +99,7 @@ let findChat = setInterval(function () {
 
 function snuffThemOut(lines) {
 	for (const line of lines) {
-		if (line.text.includes("follow my light")) {
+		if (line.text.includes("follow my light") || line.text.includes("the path toward the")) {
 			if (latestFollow !== line.fragments[1].text && latestFollow < line.fragments[1].text) {
 				latestFollow = line.fragments[1].text;
 				fragTimer.reset(234);

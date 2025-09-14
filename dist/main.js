@@ -4380,7 +4380,7 @@ var findChat = setInterval(function () {
 function snuffThemOut(lines) {
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
-        if (line.text.includes("follow my light")) {
+        if (line.text.includes("follow my light") || line.text.includes("the path toward the")) {
             if (latestFollow !== line.fragments[1].text && latestFollow < line.fragments[1].text) {
                 latestFollow = line.fragments[1].text;
                 fragTimer.reset(234);
