@@ -56,7 +56,8 @@ reader.readargs = {
 		mixColor(69, 131, 145), // Blue (Amascut)
 		mixColor(153, 255, 153), // Green (Amascut's Voice)
 		mixColor(0, 255, 0), // Green (Friends Chat)
-		mixColor(200,50,50) // Red (Expire thing)
+		mixColor(200, 50, 50), // Red (Expire thing)
+		mixColor(195, 183, 72) // Red (Expire thing)
 	],
 }
 
@@ -98,13 +99,14 @@ let findChat = setInterval(function () {
 
 function snuffThemOut(lines) {
 	for (const line of lines) {
-		if (line.text.includes("Come, follow my light...") && latestFollow < line.fragments[1].text)
-		{
-			latestFollow = line.fragments[1].text;
-			fragTimer.reset(234);
-			fragTimer.start(10);
+		if (line.text.includes("follow my light")) {
+			if (latestFollow !== line.fragments[1].text && latestFollow < line.fragments[1].text) {
+				latestFollow = line.fragments[1].text;
+				fragTimer.reset(234);
+				fragTimer.start(10);
+			}
 		}
-		if (line.text.includes("I WILL NOT BE SUBJUGATED BY A MORTAL!")) {
+		if (line.text.includes("I WILL NOT BE SUBJUGATED")) {
 			// index 1 is the timestamp, index 2 is the chat message
 			if (latestSubjugated !== line.fragments[1].text && latestSubjugated < line.fragments[1].text) {
 				latestSubjugated = line.fragments[1].text;

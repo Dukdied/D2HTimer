@@ -4347,7 +4347,8 @@ reader.readargs = {
         (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(69, 131, 145), // Blue (Amascut)
         (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(153, 255, 153), // Green (Amascut's Voice)
         (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(0, 255, 0), // Green (Friends Chat)
-        (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(200, 50, 50) // Red (Expire thing)
+        (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(200, 50, 50), // Red (Expire thing)
+        (0,alt1__WEBPACK_IMPORTED_MODULE_0__.mixColor)(195, 183, 72) // Red (Expire thing)
     ],
 };
 function showSelectedChat(chat) {
@@ -4379,12 +4380,14 @@ var findChat = setInterval(function () {
 function snuffThemOut(lines) {
     for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var line = lines_1[_i];
-        if (line.text.includes("Come, follow my light...") && latestFollow < line.fragments[1].text) {
-            latestFollow = line.fragments[1].text;
-            fragTimer.reset(234);
-            fragTimer.start(10);
+        if (line.text.includes("follow my light")) {
+            if (latestFollow !== line.fragments[1].text && latestFollow < line.fragments[1].text) {
+                latestFollow = line.fragments[1].text;
+                fragTimer.reset(234);
+                fragTimer.start(10);
+            }
         }
-        if (line.text.includes("I WILL NOT BE SUBJUGATED BY A MORTAL!")) {
+        if (line.text.includes("I WILL NOT BE SUBJUGATED")) {
             // index 1 is the timestamp, index 2 is the chat message
             if (latestSubjugated !== line.fragments[1].text && latestSubjugated < line.fragments[1].text) {
                 latestSubjugated = line.fragments[1].text;
